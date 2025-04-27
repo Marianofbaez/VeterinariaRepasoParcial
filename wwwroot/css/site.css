@@ -41,6 +41,10 @@ body {
     margin-bottom: 60px;
     background-color: #ffffff;
     line-height: 1.6;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/005/577/533/non_2x/puppy-dog-border-collie-and-stethoscope-isolated-on-blue-background-little-dog-on-reception-at-veterinary-doctor-in-vet-clinic-pet-health-care-and-animals-concept-banner-photo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 /* Botones: estilo sobrio y profesional */

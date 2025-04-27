@@ -9,8 +9,8 @@ namespace VeterinariaRepasoParcial.Controllers
         public BibliotecaDatos _BD = new BibliotecaDatos();
         public IActionResult Index()
         {
-            //return View(_BD.ListarMascotas(0));    
-            return View(_BD.ListarMascotas());    
+            return View(_BD.ListarMascotas(0));
+            //return View(_BD.ListarMascotas());    
         }
         public IActionResult Create()
         {
@@ -41,6 +41,72 @@ namespace VeterinariaRepasoParcial.Controllers
             {
                 return View();
             }
+        }
+        public IActionResult Details(int id)
+        {
+            return View(_BD.ListarMascotas(id).FirstOrDefault());
+        }
+
+        public IActionResult Edit(int id)
+        {
+            return View(_BD.ListarMascotas(id).FirstOrDefault());
+        }
+        [HttpPost]
+        public IActionResult Edit(Mascota mascota)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                ViewBag.Error = _BD.EditarMascota(mascota);
+                if (ViewBag.Error != "")
+                {
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("index");
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        public IActionResult Delete(int id)
+        {
+            return View(_BD.ListarMascotas(id).FirstOrDefault());
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                if (_BD.ListarMascotas(id).Any())
+                {
+                    ViewBag.Error = _BD.BorrarMascota(id);
+                    if (ViewBag.Error != "")
+                    {
+                        return View();
+                    }
+                    else
+                    {
+                        return RedirectToAction("index");
+                    }
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch
+            {
+                return View();
+            }
+
         }
     }
 }
